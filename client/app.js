@@ -1,3 +1,5 @@
+const socket = io();
+
 //HTML Refs
 const loginForm = document.getElementById('welcome-form');
 const messagesSection = document.getElementById('messages-section');
