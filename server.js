@@ -1,9 +1,9 @@
 // initialize server
-const express = require('express');
-const app = express();
-const socket = require('socket.io');
-const db = require('./db');
-const path = require('path');
+const express = require('express'),
+  app = express(),
+  socket = require('socket.io'),
+  db = require('./db'),
+  path = require('path');
 
 app.get('/messages', (req, res) => {
   res.json(db.messages);
@@ -19,8 +19,16 @@ app.use((req, res) => {
   res.status(404).send('404 You shall not pass!');
 });
 
-app.listen(process.env.PORT || 8000, () => {
+const server = app.listen(process.env.PORT || 8000, () => {
   console.log('Server is running on port: 8000');
 });
 
-const io = socket(app);
+const io = socket(server);
+
+io.on('connection', (socket) => {
+  console.log('New client! Its id – ' + socket.id);
+  socket.on('message', () => {
+    console.log("Oh, I've got something from " + socket.id);
+  });
+  console.log("I've added a listener on message event \n");
+});

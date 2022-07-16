@@ -1,12 +1,12 @@
 const socket = io();
 
 //HTML Refs
-const loginForm = document.getElementById('welcome-form');
-const messagesSection = document.getElementById('messages-section');
-const messagesList = document.getElementById('messages-list');
-const addMessageForm = document.getElementById('add-messages-form');
-const userNameInput = document.getElementById('username');
-const messageContentInput = document.getElementById('message-content');
+const loginForm = document.getElementById('welcome-form'),
+  messagesSection = document.getElementById('messages-section'),
+  messagesList = document.getElementById('messages-list'),
+  addMessageForm = document.getElementById('add-messages-form'),
+  userNameInput = document.getElementById('username'),
+  messageContentInput = document.getElementById('message-content');
 
 //Add socket event listeners
 socket.on('message', ({ author, content }) => addMessage(author, content));
