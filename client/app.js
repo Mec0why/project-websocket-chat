@@ -8,6 +8,9 @@ const addMessageForm = document.getElementById('add-messages-form');
 const userNameInput = document.getElementById('username');
 const messageContentInput = document.getElementById('message-content');
 
+//Add socket event listeners
+socket.on('message', ({ author, content }) => addMessage(author, content));
+
 //Global variables
 let userName = '';
 
