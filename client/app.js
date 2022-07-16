@@ -47,9 +47,13 @@ const addMessage = (author, content) => {
 const sendMessage = (e) => {
   e.preventDefault();
 
-  if (messageContentInput.value !== '') {
-    addMessage(userName, messageContentInput.value);
-    messageContentInput.value = '';
+  let messageContent = messageContentInput.value;
+
+  if (messageContent) {
+    addMessage(userName, messageContent);
+    //Add socket event emitter
+    socket.emit('message', { author: userName, content: messageContent });
+    messageContent = '';
   } else {
     alert("Write something first! Don't be shy! ;)");
   }
