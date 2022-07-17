@@ -1,13 +1,12 @@
 const db = {
   messages: [
-    { id: 1, author: 'John Doe', text: 'Hi!' },
+    { author: 'John Doe', content: 'Hi!' },
     {
-      id: 2,
       author: 'John Doe',
       text: 'It is nice to meet You!',
     },
-    { id: 3, author: 'You', text: 'Hi!' },
-    { id: 4, author: 'You', text: 'How are You doing?' },
+    { author: 'You', content: 'Hi!' },
+    { author: 'You', content: 'How are You doing?' },
   ],
 };
 

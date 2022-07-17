@@ -27,7 +27,7 @@ const io = socket(server);
 
 io.on('connection', (socket) => {
   console.log('New client! Its id – ' + socket.id);
-  socket.on('message', () => {
+  socket.on('message', (message) => {
     console.log("Oh, I've got something from " + socket.id);
     db.messages.push(message);
     socket.broadcast.emit('message', message);
