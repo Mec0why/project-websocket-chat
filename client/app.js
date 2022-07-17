@@ -11,6 +11,7 @@ const loginForm = document.getElementById('welcome-form'),
 //Add socket event listeners
 socket.on('message', ({ author, content }) => addMessage(author, content));
 socket.on('newUser', ({ author, content }) => addMessage(author, content));
+socket.on('userLeaves', ({ author, content }) => addMessage(author, content));
 
 //Global variables
 let userName = '';

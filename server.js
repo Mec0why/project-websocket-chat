@@ -52,6 +52,15 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('Oh, socket ' + socket.id + ' has left');
 
+    let leavingUser = db.users.find((user) => user.id === socket.id);
+
+    console.log('This User left: ' + leavingUser.name);
+
+    socket.broadcast.emit('userLeaves', {
+      author: 'ChatBot',
+      content: `${leavingUser.name} has left the conversation... :(`,
+    });
+
     const filteredDb = db.users.filter((user) =>
       user.id === socket.id ? false : true
     );
