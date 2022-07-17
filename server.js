@@ -30,6 +30,7 @@ io.on('connection', (socket) => {
   socket.on('message', () => {
     console.log("Oh, I've got something from " + socket.id);
     db.messages.push(message);
+    socket.broadcast.emit('message', message);
   });
   socket.on('disconnect', () => {
     console.log('Oh, socket ' + socket.id + ' has left');
