@@ -21,6 +21,9 @@ const login = (e) => {
   if (userNameInput.value !== '') {
     userName = userNameInput.value;
     console.log(userName);
+
+    socket.emit('loggedIn', { name: userName, id: socket.id });
+
     loginForm.classList.toggle('show');
     messagesSection.classList.toggle('show');
   } else {
@@ -32,9 +35,11 @@ const addMessage = (author, content) => {
   const message = document.createElement('li');
   message.classList.add('message');
   message.classList.add('message--received');
+
   if (author === userName) {
     message.classList.add('message--self');
   }
+
   message.innerHTML = `
     <h3 class="message__author">${userName === author ? 'You' : author}</h3>
     <div class="message__content">
@@ -51,8 +56,10 @@ const sendMessage = (e) => {
 
   if (messageContent) {
     addMessage(userName, messageContent);
+
     //Add socket event emitter
     socket.emit('message', { author: userName, content: messageContent });
+
     messageContent = '';
   } else {
     alert("Write something first! Don't be shy! ;)");
