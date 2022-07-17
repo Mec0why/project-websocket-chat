@@ -37,6 +37,12 @@ io.on('connection', (socket) => {
     db.users.push(user);
   });
 
+  socket.on('newUser', (newUser) => {
+    console.log(newUser.content);
+    db.messages.push(newUser);
+    socket.broadcast.emit('newUser', newUser);
+  });
+
   socket.on('message', (message) => {
     console.log("Oh, I've got something from " + socket.id);
     db.messages.push(message);

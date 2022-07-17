@@ -10,9 +10,11 @@ const loginForm = document.getElementById('welcome-form'),
 
 //Add socket event listeners
 socket.on('message', ({ author, content }) => addMessage(author, content));
+socket.on('newUser', ({ author, content }) => addMessage(author, content));
 
 //Global variables
 let userName = '';
+const chatBot = 'ChatBot';
 
 //Code
 const login = (e) => {
@@ -23,6 +25,10 @@ const login = (e) => {
     console.log(userName);
 
     socket.emit('loggedIn', { name: userName, id: socket.id });
+    socket.emit('newUser', {
+      author: chatBot,
+      content: `${userName} has joined the conversation!`,
+    });
 
     loginForm.classList.toggle('show');
     messagesSection.classList.toggle('show');
@@ -38,6 +44,10 @@ const addMessage = (author, content) => {
 
   if (author === userName) {
     message.classList.add('message--self');
+  }
+
+  if (author === chatBot) {
+    message.classList.add('message--chatbot');
   }
 
   message.innerHTML = `
